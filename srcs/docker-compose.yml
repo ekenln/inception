@@ -1,0 +1,38 @@
+services:
+  mariadb:
+    container_name: mariadb
+    build:
+      context: ./srcs/requirements/mariadb
+      dockerfile: Dockerfile
+    environment:
+      - name=value
+    # volumes:
+    network:
+      inception
+  
+  wordpress:
+    container_name: wordpress
+    build:
+      context: ./srcs/requirements/wordpress
+      dockerfile: Dockerfile
+    # volumes:
+    network:
+      - inception
+
+  nginx:
+    container_name: nginx
+    build:
+      context: ./srcs/requirements/nginx
+      dockerfile: Dockerfile
+    ports:
+      - "443:443"
+    network:
+      inception
+    depends_on:
+      - wordpress
+
+network:
+  inception:
+    driver: bridge
+
+# volumes:
