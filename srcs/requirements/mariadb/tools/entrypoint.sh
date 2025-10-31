@@ -16,4 +16,4 @@ EOF
 # GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%' ;
 # FLUSH PRIVILEGES;
 
-exec mariadbd --user=mysql --datadir=/var/lib/mysql
+# exec mariadbd --user=mysql --datadir=/var/lib/mysql

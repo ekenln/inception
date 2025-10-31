@@ -4,11 +4,11 @@ services:
     build:
       context: requirements/mariadb
       dockerfile: Dockerfile
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    # environment:
+    #   - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    #   - MYSQL_DATABASE=${MYSQL_DATABASE}
+    #   - MYSQL_USER=${MYSQL_USER}
+    #   - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - mariadb-db:/var/lib/mysql
 
@@ -20,11 +20,11 @@ services:
   #   build:
   #     context: requirements/wordpress
   #     dockerfile: Dockerfile
-    # volumes:
-    # network:
-    #   - inception
-    # depends_on:
-    #   - mariadb
+  #   volumes:
+  #   # network:
+  #   #   - inception
+  #   depends_on:
+  #     - mariadb
 
   nginx:
     container_name: nginx
