@@ -23,4 +23,4 @@ EXPOSE 3306
 
 ENTRYPOINT [ "/entrypoint.sh" ]
 
-CMD ["mariadbd", "--user=mysql", "--datadir=/var/lib/mysql"]
+# CMD ["mariadbd", "--user=mysql", "--datadir=/var/lib/mysql"]

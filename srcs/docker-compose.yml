@@ -4,27 +4,31 @@ services:
     build:
       context: requirements/mariadb
       dockerfile: Dockerfile
-    # environment:
-    #   - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-    #   - MYSQL_DATABASE=${MYSQL_DATABASE}
-    #   - MYSQL_USER=${MYSQL_USER}
-    #   - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - mariadb-db:/var/lib/mysql
 
-    # network:
-    #   - inception
+    networks:
+      - inception
   
-  # wordpress:
-  #   container_name: wordpress
-  #   build:
-  #     context: requirements/wordpress
-  #     dockerfile: Dockerfile
-  #   volumes:
-  #   # network:
-  #   #   - inception
-  #   depends_on:
-  #     - mariadb
+  wordpress:
+    container_name: wordpress
+    build:
+      context: requirements/wordpress
+      dockerfile: Dockerfile
+    environment:
+      - WORDPRESS_DB_HOST=mariadb
+      - WORDPRESS_DB_NAME=${MYSQL_DATABASE}
+      - WORDPRESS_DB_USER=${MYSQL_USER}
+      - WORDPRESS_DB_PASSWORD=${MYSQL_PASSWORD}
+    networks:
+      - inception
+    depends_on:
+      - mariadb
 
   nginx:
     container_name: nginx
@@ -33,14 +37,14 @@ services:
       dockerfile: Dockerfile
     ports:
       - "443:443"
-    # network:
-    #   - inception
-    # depends_on:
-    #   - wordpress
+    networks:
+      - inception
+    depends_on:
+      - wordpress
 
-# network:
-#   inception:
-#     driver: bridge
+networks:
+  inception:
+    driver: bridge
 
 volumes:
   mariadb-db:
