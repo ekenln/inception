@@ -29,6 +29,18 @@ if [ ! -f wp-config.php ]; then
 	sed -i "s/password_here/${WORDPRESS_DB_PASSWORD}/" wp-config.php
 	sed -i "s/localhost/${WORDPRESS_DB_HOST}/" wp-config.php
 
+	wp core install \
+		--url="${DOMAIN_NAME}" \
+		--title="inception" \
+		--admin_user="${WP_ADMIN}" \
+		--admin_password="${WP_DAMIN_PASSWORD}" \
+		--admin_email="${WP_ADMIN_EMAIL}"
+	
+	wp user create "${WP_USER}" "${WP_USER_EMAIL}" \
+		--role=author \
+		--porcelain
+
 fi
-echo "hello there"
+
+echo "wordpress installation complete"
 exec php-fpm83 -F
