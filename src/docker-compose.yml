@@ -1,0 +1,34 @@
+services:
+  mariadb:
+    build:
+      context: ./src/mariadb
+      dockerfile: Dockerfile
+    env_file:
+      - ./src/.env
+    expose:
+      3306
+    networks:
+      - inception
+
+  nginx:
+    build:
+      context: ./src/nginx
+      dockerfile: Dockerfile
+    env_file:
+      - ./src/.env
+    expose:
+      8443:8443
+    networks:
+      - inception
+  wordpress:
+    build:
+      context: ./src/wordpress
+      dockerfile: Dockerfile
+    env_file:
+      - ./src/.env
+    expose:
+      9000
+    networks:
+      - inception
+    depends_on:
+      - mariadb

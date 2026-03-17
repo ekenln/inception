@@ -1,5 +1,5 @@
 all:
-	@docker compose -f srcs/docker-compose.yml up
+	@docker-compose -f srcs/docker-compose.yml up
 
 wp:
 	@docker compose -f srcs/docker-compose.yml up wordpress
