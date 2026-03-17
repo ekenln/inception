@@ -1,23 +1,32 @@
+COMPOSE = docker compose -f src/docker-compose.yml
+
 all:
-	@docker-compose -f srcs/docker-compose.yml up
-
-wp:
-	@docker compose -f srcs/docker-compose.yml up wordpress
-
-mdb:
-	@docker compose -f srcs/docker-compose.yml up mariadb
-
-
-logs-wp:
-	@docker-compose -f srcs/docker-compose.yml logs wordpress
-
-logs-mbd:
-	@docker-compose -f srcs/docker-compose.yml logs mariadb
+	@${COMPOSE} up --build -d
 
 down:
-	@docker compose -f srcs/docker-compose.yml down -v
+	@${COMPOSE} down -v
 
 clean:
-	@docker compose -f srcs/docker-compose.yml down -v
+	@${COMPOSE} down -v
+	docker system prune -af
+
+fclean: clean
+	rm -rf /home/eeklund/data/mariadb/*
+	rm -rf /home/eeklund/data/wordpress/*
+
+create_dirs:
+	@mkdir -p /home/eeklund/data/mariadb
+	@mkdir -p /home/eeklund/data/wordpress
+
+logs:
+	@${COMPOSE} logs -f
+
+logs-wp:
+	@${COMPOSE} logs wordpress
+
+logs-mbd:
+	@${COMPOSE} logs mariadb
 
 re: clean all
+
+.PHONY: all down clean fclean re create_dirs logs logs-wp logs-mdb
