@@ -1,5 +1,6 @@
 #!/bin/sh
 
+set -x
 service mariadb start;
 
 sleep 10;
