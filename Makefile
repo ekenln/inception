@@ -11,8 +11,8 @@ clean:
 	docker system prune -af
 
 fclean: clean
-	rm -rf /home/eeklund/data/mariadb/*
-	rm -rf /home/eeklund/data/wordpress/*
+	docker run --rm -v /home/eeklund/data/mariadb:/data alpine sh -c "rm -rf /data/*"
+	docker run --rm -v /home/eeklund/data/wordpress:/data alpine sh -c "rm -rf /data/*"
 
 create_dirs:
 	@mkdir -p /home/eeklund/data/mariadb
