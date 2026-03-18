@@ -15,7 +15,7 @@ sleep 10
 
 if [ ! -f wp-config.php ]; then
 	wp config create --allow-root \
-					--dbname=$MYSQL_DATABASE \
+					--dbname=$DATABASE_NAME \
 					--dbuser=$MYSQL_USER \
 					--dbpass=$MYSQL_PASSWORD \
 					--dbhost=mariadb:3306
