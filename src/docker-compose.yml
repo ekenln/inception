@@ -1,5 +1,6 @@
 services:
   mariadb:
+    container_name: mariadb
     build:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
@@ -11,8 +12,10 @@ services:
       - db:/var/lib/mysql
     networks:
       - inception
+    restart: unless-stopped
 
   wordpress:
+    container_name: wordpress
     build:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
@@ -26,8 +29,10 @@ services:
       - inception
     depends_on:
       - mariadb
+    restart: unless-stopped
 
   nginx:
+    container_name: nginx
     build:
       context: ./requirements/nginx
       dockerfile: Dockerfile
@@ -41,6 +46,7 @@ services:
       - inception
     depends_on:
       - wordpress
+    restart: unless-stopped
 
 volumes:
   db:
