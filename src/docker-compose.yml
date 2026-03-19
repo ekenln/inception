@@ -4,6 +4,7 @@ services:
     build:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
+    image: mariadb:inception
     env_file:
       - .env
     expose:
@@ -19,10 +20,11 @@ services:
     build:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
+    image: wordpress:inception
     env_file:
       - .env
     volumes:
-      - wp-data:/var/www/wordpress
+      - wp_data:/var/www/wordpress
     expose:
       - 9000
     networks:
@@ -36,10 +38,11 @@ services:
     build:
       context: ./requirements/nginx
       dockerfile: Dockerfile
+    image: nginx:inception
     env_file:
       - .env
     volumes:
-      - wp-data:/var/www/wordpress
+      - wp_data:/var/www/wordpress
     ports:
       - "8443:8443"
     networks:
@@ -55,7 +58,7 @@ volumes:
       type: none
       o: bind
       device: /home/eeklund/data/mariadb
-  wp-data:
+  wp_data:
     driver: local
     driver_opts:
       type: none
