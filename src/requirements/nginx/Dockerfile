@@ -18,6 +18,6 @@ RUN mkdir -p /var/www/wordpress /var/run/nginx && \
     chmod 755 /var/www/wordpress && \
     chown -R www-data:www-data /var/www/wordpress
 
-EXPOSE 8443
+EXPOSE 443
 
 CMD [ "nginx", "-g", "daemon off;" ]
