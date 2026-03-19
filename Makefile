@@ -1,6 +1,6 @@
 COMPOSE = docker compose -f src/docker-compose.yml
-
-all:
+DATA_DIR = /home/eeklund/data
+all: create_dirs
 	@${COMPOSE} up --build -d
 
 down:
@@ -11,12 +11,11 @@ clean:
 	docker system prune -af
 
 fclean: clean
-	docker run --rm -v /home/eeklund/data/mariadb:/data alpine sh -c "rm -rf /data/*"
-	docker run --rm -v /home/eeklund/data/wordpress:/data alpine sh -c "rm -rf /data/*"
+	sudo rm -rf ${DATA_DIR}/*
 
 create_dirs:
-	@mkdir -p /home/eeklund/data/mariadb
-	@mkdir -p /home/eeklund/data/wordpress
+	@mkdir -p ${DATA_DIR}/mariadb
+	@mkdir -p ${DATA_DIR}/wordpress
 
 logs:
 	@${COMPOSE} logs -f
