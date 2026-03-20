@@ -9,7 +9,7 @@
 
 ## Configuration
  
-All credentials and environment-specific values are stored in `src/.env`. Create this file before building:
+All credentials and environment-specific values are stored in `srcs/.env`. Create this file before building:
  
 ```env
 DOMAIN_NAME=<domain_name>
@@ -70,7 +70,7 @@ make fclean
 
 ### Check running containers
 ```bash
-docker compose -f src/docker-compose.yml ps
+docker compose -f srcs/docker-compose.yml ps
 ```
 
 ### View live logs for all services

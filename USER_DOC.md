@@ -43,7 +43,7 @@ Log in with the admin credentials from the `.env` file:
 
 ## Locate and manage credentials
 
-All credentials are stored in the `src/.env` file at the root of the project.
+All credentials are stored in the `srcs/.env` file at the root of the project.
  
 | Credential | Variable in `.env` |
 |---|---|

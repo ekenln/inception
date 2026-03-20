@@ -3,10 +3,12 @@
 # Inception
 
 ## Description
-This project aims to broaden your knowledge of system administration by using Docker.
+
+The subject describes it like this: "This project aims to broaden your knowledge of system administration by using Docker.
 You will virtualize several Docker images, creating them in your new personal virtual
-machine.
-In other words the goal is to set up a small infrastructre composed of multiple services running in separate Docker containers, all orchestrated wth Docker Compose and run in a Virtual machine.
+machine."
+
+So the goal is to set up a small infrastructure composed of multiple services running in separate Docker containers, all orchestrated with Docker Compose and run in a Virtual machine.
 
 The infrastructure contains:
 - **NGINX** - serves as the only entrypoint, handling https traffic on port 443 with a self signed certificate TLSv1.3
@@ -20,7 +22,7 @@ All images are written by me using debian:bookworm as base image.
 ## Design choices
 
 ### Virtual Machine vs Docker
-A virtual machine is a simulated computer system. it does not have access to the host system's operating system, files or hardware. Running a VM involves installing an entire OS. This makes them heavy, slow to start, and resource-intensive. Docker containers, on the other hand, share the host's kernel and isolate only the application layer. This makes them lightweight, fast to start, and much more efficient in terms of resource usage. For a project like Inception, Docker is ideal because each service (nginx, wordpress, mariadb) can be isolated, reproducible, and easily networked together.
+A virtual machine is a simulated computer system. It does not have access to the host system's operating system, files or hardware. Running a VM involves installing an entire OS. This makes them heavy, slow to start, and resource-intensive. Docker containers, on the other hand, share the host's kernel and isolate only the application layer.  This makes them lightweight, fast to start, and much more efficient in terms of resource usage. For a project like Inception, Docker is ideal because each service (nginx, wordpress, mariadb) can be isolated, reproducible, and easily networked together.
 
 ### Secrets vs Environment Variables
 Environment variables are simple key-value pairs passed into a container at runtime. They are easy to use but can be exposed through `docker inspect`, logs, or shell history. Docker Secrets are a more secure alternative — they are stored encrypted in Docker's internal store and mounted as files inside the container, never exposed as environment variables. For this project, `.env` files are used for simplicity, but in a production environment Docker Secrets would be the preferred approach for sensitive values like passwords.
