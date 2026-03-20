@@ -1,32 +1,93 @@
-# inception
+*This project has been created as part of the 42 curriculum by eeklund.*
 
-Diving into devOps, discovering Docker engine
+# Inception
 
-A README.md file must be provided at the root of your Git repository. Its purpose is
-to allow anyone unfamiliar with the project (peers, staff, recruiters, etc.) to quickly
-understand what the project is about, how to run it, and where to find more information
-on the topic.
-The README.md must include at least:
-• The very first line must be italicized and read: This project has been created as part
-of the 42 curriculum by <login1>[, <login2>[, <login3>[...]]].
-• A “Description” section that clearly presents the project, including its goal and a
-brief overview.
-• An “Instructions” section containing any relevant information about compilation,
-installation, and/or execution.
-• A “Resources” section listing classic references related to the topic (documentation, articles, tutorials, etc.), as well as a description of how AI was used —
-specifying for which tasks and which parts of the project.
-➠ Additional sections may be required depending on the project (e.g., usage
-examples, feature list, technical choices, etc.).
-Any required additions will be explicitly listed below.
-• A Project description section must also explain the use of Docker and the sources
-included in the project. It must indicate the main design choices, as well as a
-comparison between:
+## Description
+This project aims to broaden your knowledge of system administration by using Docker.
+You will virtualize several Docker images, creating them in your new personal virtual
+machine.
+In other words the goal is to set up a small infrastructre composed of multiple services running in separate Docker containers, all orchestrated wth Docker Compose and run in a Virtual machine.
 
-◦ Virtual Machines vs Docker
+The infrastructure contains:
+- **NGINX** - serves as the only entrypoint, handling https traffic on port 443 with a self signed certificate TLSv1.3
 
-◦ Secrets vs Environment Variables
+- **WordPress** — a PHP-FPM application giving a WordPress site
 
-◦ Docker Network vs Host Network
+- **MariaDB** - the database, storing the WordPress data such as users
 
-◦ Docker Volumes vs Bind Mounts
-	While bind mounts are dependent on the directory structure and OS of the host machine, volumes are completely managed by Docker. source: https://docs.docker.com/engine/storage/volumes/
+All images are written by me using debian:bookworm as base image, No pre-built images are used.
+
+## Design choices
+
+### Virtual Machine vs Docker
+A virtual machine is a simulated computer system. it does not have access to the host system's operating system, files or hardware. Running a VM involves installing an entire OS. This makes them heavy, slow to start, and resource-intensive. Docker containers, on the other hand, share the host's kernel and isolate only the application layer. This makes them lightweight, fast to start, and much more efficient in terms of resource usage. For a project like Inception, Docker is ideal because each service (nginx, wordpress, mariadb) can be isolated, reproducible, and easily networked together.
+
+### Secrets vs Environment Variables
+Environment variables are simple key-value pairs passed into a container at runtime. They are easy to use but can be exposed through `docker inspect`, logs, or shell history. Docker Secrets are a more secure alternative — they are stored encrypted in Docker's internal store and mounted as files inside the container, never exposed as environment variables. For this project, `.env` files are used for simplicity, but in a production environment Docker Secrets would be the preferred approach for sensitive values like passwords.
+
+### Docker Network vs Host Network
+With a docker network and communication using the services names as hostnames, the container network then becomes completely isolated from the host, which is safer. Host networking does not containerize the containers' network and you can access the thorugh the host network.
+
+### Docker Volumes vs Bind Mounts
+When you use a bind mount, a file or directory on the host machine is mounted from the host into a container. By contrast, when you use a volume, a new directory is created within Docker's storage directory on the host machine, and Docker manages that directory's contents.
+While bind mounts are dependent on the directory structure and OS of the host machine, volumes are completely managed by Docker.
+
+
+## Instructions
+
+- git clone
+- cd inception
+- create and fill .env file
+```env
+DOMAIN_NAME=<domain_name>
+TITLE=inception
+ 
+DATABASE_HOST=mariadb
+DATABASE_NAME=wp_db
+MYSQL_USER=youruser
+MYSQL_PASSWORD=yourpassword
+MYSQL_ROOT_PASSWORD=yourrootpassword
+ 
+WP_ADMIN=admin
+WP_ADMIN_EMAIL=admin@example.com
+WP_ADMIN_PASSWORD=adminpass
+ 
+WP_USER=user
+WP_USER_EMAIL=user@example.com
+WP_USER_PASSWORD=userpass
+```
+- setup host name to your preferred domain
+```bash
+echo "127.0.0.1 <domain_name>" | sudo tee -a /etc/hosts
+```
+- make
+
+## Resources
+
+### Docker & Containers
+- [Docker official documentation](https://docs.docker.com/)
+- [Docker Compose reference](https://docs.docker.com/compose/)
+- [Dockerfile best practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
+ 
+### volumes vs bind mounts
+- [Docker official docs - volumes](https://docs.docker.com/engine/storage/volumes/)
+- [Docker official docs - bind-mounts](https://docs.docker.com/engine/storage/bind-mounts/)
+
+### NGINX & SSL
+- [NGINX beginner's guide](https://nginx.org/en/docs/beginners_guide.html)
+- [Configuring HTTPS with NGINX](https://nginx.org/en/docs/http/configuring_https_servers.html)
+- [OpenSSL self-signed certificate](https://www.openssl.org/docs/man1.1.1/man1/req.html)
+ 
+### WordPress & PHP-FPM
+- [WordPress CLI documentation](https://developer.wordpress.org/cli/commands/)
+- [PHP-FPM configuration](https://www.php.net/manual/en/install.fpm.configuration.php)
+ 
+### MariaDB
+- [MariaDB documentation](https://mariadb.com/kb/en/documentation/)
+
+### AI Usage
+Claude (Anthropic) was used during this project for:
+- Debugging Docker networking and port mapping issues
+- Understanding the difference between Docker concepts (volumes, networks, secrets)
+- Writing and reviewing the nginx configuration
+- Helping structure and write this README and accompanying documentation
