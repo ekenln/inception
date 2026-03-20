@@ -25,14 +25,13 @@ All images are written by me using debian:bookworm as base image.
 A virtual machine is a simulated computer system. It does not have access to the host system's operating system, files or hardware. Running a VM involves installing an entire OS. This makes them heavy, slow to start, and resource-intensive. Docker containers, on the other hand, share the host's kernel and isolate only the application layer.  This makes them lightweight, fast to start, and much more efficient in terms of resource usage. For a project like Inception, Docker is ideal because each service (nginx, wordpress, mariadb) can be isolated, reproducible, and easily networked together.
 
 ### Secrets vs Environment Variables
-Environment variables are simple key-value pairs passed into a container at runtime. They are easy to use but can be exposed through `docker inspect`, logs, or shell history. Docker Secrets are a more secure alternative — they are stored encrypted in Docker's internal store and mounted as files inside the container, never exposed as environment variables. For this project, `.env` files are used for simplicity, but in a production environment Docker Secrets would be the preferred approach for sensitive values like passwords.
+Environment variables are simple key-value pairs passed into a container at runtime. Docker Secrets are a more secure alternative — they are stored encrypted in Docker's internal store and mounted as files inside the container, never exposed as environment variables. For this project, `.env` files are used for simplicity, but in a production environment Docker Secrets would be the preferred approach for sensitive values like passwords.
 
 ### Docker Network vs Host Network
-With a docker network and communication using the services names as hostnames, the container network then becomes completely isolated from the host, which is safer. Host networking does not containerize the containers' network and you can access the thorugh the host network.
+With a docker network and communication using the services names as hostnames, the container network then becomes completely isolated from the host, which is safer. Host networking does not containerize the containers' network and you can access them through the host network.
 
 ### Docker Volumes vs Bind Mounts
-When you use a bind mount, a file or directory on the host machine is mounted from the host into a container. By contrast, when you use a volume, a new directory is created within Docker's storage directory on the host machine, and Docker manages that directory's contents.
-While bind mounts are dependent on the directory structure and OS of the host machine, volumes are completely managed by Docker.
+Both are ways to persist data. When you use a bind mount, a file or directory on the host machine is mounted from the host into a container. This, in effect, means that you can view the data on the host. By contrast, when you use a volume, a new directory is created within Docker's storage directory on the host machine, and Docker manages that directory's contents.
 
 
 ## Instructions
@@ -66,6 +65,7 @@ echo "127.0.0.1 <domain_name>" | sudo tee -a /etc/hosts
 ## Resources
 
 ### Docker & Containers
+- [introduction to docker](https://www.geeksforgeeks.org/devops/introduction-to-docker/)
 - [Docker official documentation](https://docs.docker.com/)
 - [Docker Compose reference](https://docs.docker.com/compose/)
 - [Dockerfile best practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
@@ -90,8 +90,6 @@ echo "127.0.0.1 <domain_name>" | sudo tee -a /etc/hosts
 - [MariaDB documentation](https://mariadb.com/kb/en/documentation/)
 
 ### AI Usage
-Claude (Anthropic) was used during this project for:
 - Debugging Docker networking and port mapping issues
 - Understanding the difference between Docker concepts (volumes, networks, secrets)
-- Writing and reviewing the nginx configuration
 - Helping structure and write this README and accompanying documentation

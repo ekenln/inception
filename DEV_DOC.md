@@ -56,7 +56,7 @@ make down
 ```bash
 make re
 ```
-calls make down and all so the data will still be there
+calls make down and make all so the data will still be there
  
 ### Full cleanup (removes all images, containers, and data)
 ```bash
