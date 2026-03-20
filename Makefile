@@ -5,13 +5,13 @@ all: create_dirs
 	@${COMPOSE} up --build -d
 
 down:
-	@${COMPOSE} down -v
+	@${COMPOSE} down
 
-clean:
-	@${COMPOSE} down -v
+clean: down
 	docker system prune -af
 
 fclean: clean
+	@${COMPOSE} down -v
 	sudo rm -rf ${DATA_DIR}/*
 
 create_dirs:
