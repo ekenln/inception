@@ -3,6 +3,12 @@
 
 ## Services used
 
+- **NGINX** - Serving the application, handling https traffic and routes requests to WordPress
+
+- **WordPress** — the actual website, Wordpress is a tool for building and managing websites without having to write code. you can for example write post and manage pages.
+
+- **MariaDB** - the database, storing the WordPress data such as users, comments and posts.
+
 ## Setup
 before starting the project you must setup required files and config. See instructions part in the README.md
 

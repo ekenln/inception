@@ -15,7 +15,7 @@ The infrastructure contains:
 
 - **WordPress** — a PHP-FPM application giving a WordPress site
 
-- **MariaDB** - the database, storing the WordPress data such as users, comments and posts.
+- **MariaDB** - the database, storing all WordPress content and user data.
 
 All images are written by me using debian:bookworm as base image.
 
