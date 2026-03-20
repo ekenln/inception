@@ -13,7 +13,7 @@ The infrastructure contains:
 
 - **WordPress** — a PHP-FPM application giving a WordPress site
 
-- **MariaDB** - the database, storing the WordPress data such as users
+- **MariaDB** - the database, storing the WordPress data such as users, comments and posts.
 
 All images are written by me using debian:bookworm as base image.
 
@@ -67,6 +67,7 @@ echo "127.0.0.1 <domain_name>" | sudo tee -a /etc/hosts
 - [Docker official documentation](https://docs.docker.com/)
 - [Docker Compose reference](https://docs.docker.com/compose/)
 - [Dockerfile best practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
+- [VMs vs docker](https://www.engineyard.com/blog/docker-vs-virtual-machines-explained/)
  
 ### volumes vs bind mounts
 - [Docker official docs - volumes](https://docs.docker.com/engine/storage/volumes/)
@@ -76,10 +77,12 @@ echo "127.0.0.1 <domain_name>" | sudo tee -a /etc/hosts
 - [NGINX beginner's guide](https://nginx.org/en/docs/beginners_guide.html)
 - [Configuring HTTPS with NGINX](https://nginx.org/en/docs/http/configuring_https_servers.html)
 - [OpenSSL self-signed certificate](https://www.openssl.org/docs/man1.1.1/man1/req.html)
+- [some small nginx config](https://serverfault.com/questions/329592/how-does-try-files-work)
  
 ### WordPress & PHP-FPM
 - [WordPress CLI documentation](https://developer.wordpress.org/cli/commands/)
 - [PHP-FPM configuration](https://www.php.net/manual/en/install.fpm.configuration.php)
+- [mysql Tutorial](https://www.tutorialspoint.com/mysql/index.htm)
  
 ### MariaDB
 - [MariaDB documentation](https://mariadb.com/kb/en/documentation/)

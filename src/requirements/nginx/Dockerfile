@@ -8,7 +8,7 @@ apt install -y curl
 RUN mkdir -p /etc/nginx/ssl
 
 # change the CN to eeklund.42.nl /fr later!
-RUN openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/nginx/ssl/inception.key -subj "/C=NL/ST=IDF/L=Amsterdam/O=42/OU=42/CN=eeklund.42.fr/UID=eeklund"
+RUN openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/nginx/ssl/inception.key -subj "/C=NL/L=Amsterdam/O=42/OU=42/CN=eeklund.42.fr/UID=eeklund"
 
 RUN mkdir -p /var/run/nginx
 
