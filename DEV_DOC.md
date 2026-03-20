@@ -14,8 +14,7 @@ All credentials and environment-specific values are stored in `src/.env`. Create
 ```env
 DOMAIN_NAME=<domain_name>
 TITLE=inception
- 
-DATABASE_HOST=mariadb
+
 DATABASE_NAME=wp_db
 MYSQL_USER=youruser
 MYSQL_PASSWORD=yourpassword
@@ -68,7 +67,12 @@ make fclean
 ---
 
 ## Managing Containers
- 
+
+### Check running containers
+```bash
+docker compose -f src/docker-compose.yml ps
+```
+
 ### View live logs for all services
 ```bash
 make logs
@@ -87,6 +91,11 @@ docker inspect wordpress
 docker inspect mariadb
 ```
 
+### Inspect volumes
+```bash
+docker volume inspect
+```
+
 ### Open a shell inside a container
 ```bash
 docker exec -it nginx sh
@@ -94,9 +103,9 @@ docker exec -it wordpress bash
 docker exec -it mariadb bash
 ```
 
-### Check running containers
+### View docker network
 ```bash
-docker compose -f src/docker-compose.yml ps
+docker network ls
 ```
 
 ## Data Persistence

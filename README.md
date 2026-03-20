@@ -15,7 +15,7 @@ The infrastructure contains:
 
 - **MariaDB** - the database, storing the WordPress data such as users
 
-All images are written by me using debian:bookworm as base image, No pre-built images are used.
+All images are written by me using debian:bookworm as base image.
 
 ## Design choices
 
@@ -41,8 +41,7 @@ While bind mounts are dependent on the directory structure and OS of the host ma
 ```env
 DOMAIN_NAME=<domain_name>
 TITLE=inception
- 
-DATABASE_HOST=mariadb
+
 DATABASE_NAME=wp_db
 MYSQL_USER=youruser
 MYSQL_PASSWORD=yourpassword
