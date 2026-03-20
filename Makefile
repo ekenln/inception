@@ -1,5 +1,6 @@
 COMPOSE = docker compose -f src/docker-compose.yml
 DATA_DIR = /home/eeklund/data
+
 all: create_dirs
 	@${COMPOSE} up --build -d
 
